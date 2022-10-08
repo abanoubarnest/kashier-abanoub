@@ -104,6 +104,7 @@ export class ProductDrownListComponent implements OnInit, OnDestroy {
   }
   redirectToAdd() {
     this.clearForm();
+    this.productForm.get('type').setValue('type1');
     this.productInfo = true;
     this.passwordToggle=false;
     // this.router.navigate(['./add-product'], { relativeTo: this.route });
@@ -127,7 +128,7 @@ export class ProductDrownListComponent implements OnInit, OnDestroy {
   initForm() {
     return this.fb.group({
       name: ['', [Validators.required]],
-      type: ['type1', [Validators.required]],
+      type: ['', [Validators.required]],
       subCategory: [false, [Validators.required]],
       category: ['', [Validators.required]],
       referenceId: [''],
@@ -155,7 +156,6 @@ export class ProductDrownListComponent implements OnInit, OnDestroy {
         else if(this.isDelete){
           this.options=  this.options.filter(item=>item.id != this.singleSelect.id);
           this.showSuccess("Product deleted successfully");
-          this.productForm.reset();
           this.clearForm();
         }
         else {
@@ -184,7 +184,7 @@ export class ProductDrownListComponent implements OnInit, OnDestroy {
     await this.modalService.open(AlertComponent, obj);
   }
   clearForm() {
-   // this.productForm.reset();
+    this.productForm.reset();
     this.productInfo = false;
     this.isUpdate = false;
     this.isDelete=false;
