@@ -1,0 +1,27 @@
+button {
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 400;
+  min-width: 50px;
+  &.save{
+
+    background-color: $green-50;
+    color: $white;
+  }
+  &.cancel{
+    color: $placeholder-color;
+  }
+  &.delete{
+  color:  $red;
+  }
+  &.delete-pop{
+    background-color:$red;
+    color: $white;
+  }
+  &:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+

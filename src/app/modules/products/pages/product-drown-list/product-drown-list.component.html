@@ -1,0 +1,240 @@
+<div class="container">
+  <div class="row m-0 mt-5 px-3 mx-3">
+    <div class="col-sm-12 col-md-4">
+      <ngx-select-dropdown
+        [instanceId]="'dropdown_1'"
+        (searchChange)="searchChange($event)"
+        tabindex="0"
+        [multiple]="false"
+        (addItem)="redirectToAdd()"
+        [(ngModel)]="singleSelect"
+        [config]="config"
+        [options]="options"
+        (change)="updateForm()"
+      ></ngx-select-dropdown>
+    </div>
+    <!-- <div class="col s12 l6 flow-text">
+      <p style="margin: 0;">Balance of selected user: {{singleSelect? singleSelect?.name : ''}}</p>
+    </div> -->
+  </div>
+  <div
+    class="row flex items-start justify-start py-3 px-2 mx-4"
+    *ngIf="productInfo"
+  >
+    <div class="col-sm-12 col-md-4">
+      <form [formGroup]="productForm">
+        <div class="mb-3">
+          <label for="name" class="mb-1 block"> Product Name </label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Name"
+            class="w-full py-2 px-2 outline-none"
+            formControlName="name"
+          />
+          <ng-container
+            *ngIf="
+              productForm.get('name').invalid && productForm.get('name').touched
+            "
+          >
+            <app-error-message></app-error-message>
+          </ng-container>
+        </div>
+        <div class="mb-2">
+          <label for="name" class="mb-1 block"> Product Type </label>
+          <div class="flex items-center">
+            <label for="opt1" class="radio">
+              <input
+                type="radio"
+                name="type"
+                id="opt1"
+                class="hidden"
+                value="type1"
+                formControlName="type"
+              />
+              <span class="label"></span>Type 1
+            </label>
+
+            <label for="opt2" class="radio">
+              <input
+                type="radio"
+                name="type"
+                id="opt2"
+                class="hidden"
+                value="type2"
+                formControlName="type"
+              />
+              <span class="label"></span>Type 2
+            </label>
+            <ng-container
+            *ngIf="
+              productForm.get('type').invalid && productForm.get('type').touched
+            "
+          >
+            <app-error-message></app-error-message>
+          </ng-container>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="name" class="mb-1 block"> Product Category </label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Name"
+            class="w-full py-2 px-2 outline-none"
+            formControlName="category"
+          />
+          <ng-container
+          *ngIf="
+            productForm.get('category').invalid && productForm.get('category').touched
+          "
+        >
+          <app-error-message></app-error-message>
+        </ng-container>
+        </div>
+        <div class="flex items-center md-checkbox mb-3">
+          <input
+            id="red-checkbox"
+            type="checkbox"
+            class="w-4 h-4"
+            formControlName="subCategory"
+          />
+          <label for="red-checkbox" class="ml-2">This is a sub-category</label>
+          <ng-container
+          *ngIf="
+            productForm.get('subCategory').invalid && productForm.get('subCategory').touched
+          "
+        >
+          <app-error-message></app-error-message>
+        </ng-container>
+        </div>
+        <div class="mb-3">
+          <div class="row m-0">
+            <div class="col-sm-12 col-md-6 mb-3 p-0">
+              <label for="name" class="mb-1 block">
+                Reference ID &nbsp;
+                <span class="optional">(Optional) </span></label
+              >
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="ID"
+                class="w-full py-2 px-2 outline-none"
+                formControlName="referenceId"
+              />
+            </div>
+            <div class="col-sm-12 col-md-6 p-0 col-pl-10 sm:p-0">
+              <label for="Password" class="mb-1 block"> Password </label>
+              <div class="relative">
+                <input
+                  type="text"
+                  name="Password"
+                  id="password"
+                  placeholder="Password"
+                  class="w-full py-2 px-2 outline-none"
+                  [type]="passwordToggle ? 'password' : 'text'"
+                  formControlName="password"
+                />
+                <div
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5"
+                >
+                  <img
+                    *ngIf="!passwordToggle"
+                    (click)="passwordToggle = true"
+                    class="h-4 w-auto cursor-pointer"
+                    src="../../../../../assets/svg/Group 2.svg"
+                    alt="Your Company"
+                  />
+                  <img
+                    *ngIf="passwordToggle"
+                    (click)="passwordToggle = false"
+                    class="h-4 w-auto cursor-pointer"
+                    src="../../../../../assets/svg/Path 362.svg"
+                    alt="Your Company"
+                  />
+                </div>
+              </div>
+              <ng-container
+              *ngIf="
+                productForm.get('password').invalid && productForm.get('password').touched
+              "
+            >
+              <app-error-message></app-error-message>
+            </ng-container>
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="row m-0">
+            <div class="col-sm-12 col-md-6 mb-3 p-0">
+              <label for="red-checkbox" class=""> Delivery fees</label>
+              <div class="flex">
+                <label
+                  class="col-3 flex items-center justify-center bg-white border-t border-l border-b rounded-l"
+                  >EGP</label
+                >
+                <input
+                  type="text"
+                  placeholder="Delivery fees"
+                  class="col-9 rounded-none py-2 px-2"
+                  formControlName="currency"
+                />
+              </div>
+                <ng-container
+                *ngIf="
+                  productForm.get('currency').invalid && productForm.get('currency').touched
+                "
+              >
+                <app-error-message></app-error-message>
+              </ng-container>
+
+            </div>
+            <div class="col-sm-12 col-md-6 mb-3 p-0 col-pl-10 !sm:p-0">
+              <label for="red-checkbox" class=""> Delivery fees</label>
+              <div class="flex">
+                <label
+                  class="col-3 flex items-center justify-center bg-white border-t border-l border-b rounded-l"
+                  >%</label
+                >
+                <input
+                  type="text"
+                  placeholder="Delivery fees"
+                  class="col-9 rounded-none py-2 px-2"
+                  formControlName="fee"
+                />
+              </div>
+              <ng-container
+              *ngIf="
+                productForm.get('fee').invalid && productForm.get('fee').touched
+              "
+            >
+              <app-error-message></app-error-message>
+            </ng-container>
+            </div>
+
+          </div>
+        </div>
+        <div class="flex justify-between">
+          <div class="div">
+            <button class="delete" *ngIf="isUpdate" (click)="deleteProduct()">
+              Delete
+            </button>
+          </div>
+          <div class="">
+            <button class="cancel" (click)="clearForm()">Cancel</button>
+            <button
+              (click)="showAlert()"
+              [disabled]="productForm?.invalid"
+              class="save"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

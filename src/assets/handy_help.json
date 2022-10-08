@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "Pixel 4",
+    "price": 950, // original price
+    "price_reduced": null, // reduced price, if available
+    "rating": 4.6, // star rating from 1.0 to 5.0
+    "topseller": true, // flag for topselling smartphones
+    "new": true, // flag for new smartphones
+    "brand": "Google", // name of the phone manufacturer
+    "image": "google-pixel-4-black_front_zoom.png", // phone image
+    "sales_figures": 23513 // number of sold units for this phone
+  }
+]

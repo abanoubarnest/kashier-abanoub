@@ -1,0 +1,109 @@
+<div class="ngx-dropdown-container">
+  <button
+    *ngIf="!toggleDropdown"
+    type="button"
+    tabindex="-1"
+    class="ngx-dropdown-button"
+    [ngClass]="{ 'ngx-disabled': disabled }"
+    [disabled]="disabled"
+    (click)="openSelectDropdown()"
+  >
+    <span [ngClass]="this.selectedItems?.length ? 'value-text':' display-text'">{{ selectedDisplayText }} </span>
+    <span class="nsdicon-angle-down"></span>
+  </button>
+  <button
+    *ngIf="toggleDropdown"
+    type="button"
+    tabindex="-1"
+    class="ngx-dropdown-button btn_active"
+    [ngClass]="{ 'ngx-disabled': disabled }"
+    [disabled]="disabled"
+    (click)="closeSelectDropdown()"
+  >
+    <span [ngClass]="this.selectedItems?.length ? 'value-text':' display-text'">{{ selectedDisplayText }} </span>
+    <span class="nsdicon-angle-down" [ngClass]="{ up: toggleDropdown }"></span>
+  </button>
+  <div
+    #dropdownList
+    class="ngx-dropdown-list-container"
+    *ngIf="toggleDropdown"
+    [style.maxHeight]="config.height"
+    [style.top]="top"
+  >
+    <div class="search-container" *ngIf="config.search">
+      <input
+        (change)="changeSearchText($event)"
+        [style.direction]="config.inputDirection"
+        name="search-text"
+        (input)="searchTextChanged()"
+        [(ngModel)]="searchText"
+        tabindex="-1"
+        autocomplete="off"
+        [placeholder]="config.searchPlaceholder"
+      />
+      <label class="label-search">
+        <i class="bi bi-search"></i>
+      </label>
+      <ul class="available-items">
+        <li class="add-product" (click)="toggleDropdown = false;addItem.emit()">
+          <i class="bi bi-plus">
+          </i>
+            <span>
+              {{config?.labelAdd || 'Add New Item'}}
+          </span>
+        </li>
+
+      </ul>
+    </div>
+
+    <!-- <div class="select-options">
+            <div class="select-all">Select all</div>
+            <div class="clear-all">Clear all</div>
+        </div> -->
+    <!-- <ul class="selected-items">
+      <li
+        class="selected-item"
+        tabindex="-1"
+        *ngFor="let selected of selectedItems; let i = index"
+        (click)="deselectItem(selected, i)"
+        (mousedown)="optionMouseDown = true"
+      >
+        <span class="nsdicon-close">x</span>
+        <span>
+          {{
+            config.displayFn
+              ? config.displayFn(selected)
+              : selected[config.displayKey] || selected
+          }}
+        </span>
+      </li>
+    </ul>
+    <hr *ngIf="selectedItems.length > 0 && availableItems.length > 0" /> -->
+    <ul class="available-items">
+      <li
+        class="available-item"
+        #availableOption
+        *ngFor="
+          let item of availableItems
+            | filterBy: searchText:config.searchOnKey
+            | limitTo: config.limitTo;
+          let i = index
+        "
+        tabindex="-1"
+        [ngClass]="{
+          active: focusedItemIndex == i && !item.disabled,
+          disabled: item.disabled
+        }"
+        (click)="selectItem(item, i)"
+        (mousedown)="optionMouseDown = true"
+      >
+        {{
+          config.displayFn
+            ? config.displayFn(item)
+            : item[config.displayKey] || item
+        }}
+      </li>
+      <li *ngIf="showNotFound">{{ config.noResultsFound }}</li>
+    </ul>
+  </div>
+</div>

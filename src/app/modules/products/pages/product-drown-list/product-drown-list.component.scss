@@ -1,0 +1,11 @@
+.optional {
+  color: var(--color-border);
+}
+.col-pl-10 {
+  padding-left: 10px !important;
+}
+@media (max-width: 480px) {
+  .col-pl-10 {
+    padding-left: 0px !important;
+  }
+}

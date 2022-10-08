@@ -1,0 +1,45 @@
+<app-modal #modalComponent>
+  <div class="flex justify-content-between align-items-center">
+    <label class="title"> {{ title ? "Delete" + '"' + title + '"?' :"Save changes" }}</label>
+    <button type="button" class="" (click)="close()">
+      <svg
+        aria-hidden="true"
+        class="w-5 h-5"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+      <span class="sr-only">Close modal</span>
+    </button>
+    <!-- Modal header -->
+    <!-- <div class="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
+
+    </div> -->
+  </div>
+  <div class="">
+    <label class="body-color">
+      {{
+        body || "Are you sure you want to save changes made?"
+      }}
+    </label>
+  </div>
+
+  <ng-container *ngTemplateOutlet="toolbar"></ng-container>
+</app-modal>
+
+<ng-template #toolbar>
+  <div class="py-3 flex justify-end">
+    <button (click)="close()" type="button" class="cancel">Discard</button>
+
+    <button *ngIf="!title" (click)="createRecord()" class="save">Save</button>
+    <button *ngIf="title" (click)="DeleteRecord()" class="delete-pop">
+      Delete
+    </button>
+  </div>
+</ng-template>

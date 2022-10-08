@@ -1,0 +1,18 @@
+$color-primary:#F98C11;
+$black: #000;
+$white: #fff;
+$label-color:#3D3D3D;
+$placeholder-color:#828282;
+$border-color:#D6D6D6;
+$green-50:#00BCB4;
+$red:#C40000;
+:root {
+  --primary: #{$color-primary};
+  --white: #{$white};
+  --black: #{$black};
+  --bg-body:#{#F6F7FB};
+  --color-label:#{$label-color};
+  --color-holder:#{$placeholder-color};
+  --color-border:#{$border-color};
+  --green-50:#{$green-50};
+}
